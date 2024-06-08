@@ -1,0 +1,9 @@
+<div class="container" (click)="emitirEvento()">
+  <div class="tarjetas">
+    <div class="circulo"></div>
+    <img [src]="data?.pic" alt="">
+    <span>No. {{data?.id}}</span>
+    <span *ngIf="data">{{data.name | titlecase }}</span>
+    <button class="btn-detail">Detalles</button>
+  </div>
+</div>

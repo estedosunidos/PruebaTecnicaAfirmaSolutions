@@ -1,0 +1,21 @@
+
+<div class="container">
+  <img src="{{pokemon.sprites.front_default}}" *ngIf="pokemon">
+  <div *ngIf="pokemon">
+    <h3>Habilidades:</h3>
+    <ul>
+      <li *ngFor="let ability of pokemon.abilities">
+        {{ ability.ability.name }}
+      </li>
+    </ul>
+
+   <!-- layaout-page.component.html -->
+<h3>Tipo:</h3>
+<ul>
+  <li *ngFor="let tipo of pokemon.types" [ngClass]="getTipoClass(tipo.type.name)">
+    {{ tipo.type.name }}
+  </li>
+</ul>
+
+  </div>
+</div>
