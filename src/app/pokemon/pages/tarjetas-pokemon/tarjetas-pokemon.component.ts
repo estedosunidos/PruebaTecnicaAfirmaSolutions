@@ -11,11 +11,15 @@ export class TarjetasPokemonComponent {
  @Input() seleccionado:boolean = false
  @Output() clickeado = new EventEmitter<number>();
 
- emitirEvento() {
-   if (this.data && this.data.id) {
-     this.clickeado.emit(this.data.id);
-   } else {
-     console.error('El ID no está definido en los datos o es 0');
-   }
- }
+/**
+ * Emits an event with the ID of the clicked item.
+ * If the ID is not defined in the data or is 0, an error is logged.
+ */
+emitirEvento(): void {
+  if (this.data && this.data.id) {
+    this.clickeado.emit(this.data.id);
+  } else {
+    console.error('El ID no está definido en los datos o es 0');
+  }
+}
 }

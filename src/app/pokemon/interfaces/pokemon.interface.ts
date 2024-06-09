@@ -359,8 +359,8 @@ export interface Pokemons{
   held_items: HeldItem[];
   location_area_encounters: string;
   moves: Move[];
-  species: Species;
-  sprites: Sprites;
+  species: Species  | undefined;
+  sprites: Sprites  | undefined;
   stats: Stat[];
   types: Type[];
   past_types: PastType[];

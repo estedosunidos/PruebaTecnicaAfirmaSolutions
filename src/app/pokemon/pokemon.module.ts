@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared/shared.module';
 import { TarjetasPokemonComponent } from './pages/tarjetas-pokemon/tarjetas-pokemon.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { FormsModule } from '@angular/forms';
 import { DetallePokemonComponent } from './pages/detalle-pokemon/detalle-pokemon.component';
 @NgModule({
   declarations: [
@@ -31,6 +32,8 @@ import { DetallePokemonComponent } from './pages/detalle-pokemon/detalle-pokemon
     ReactiveFormsModule,
     HttpClientModule,
     MateriaModule,
+
+    FormsModule,
     InfiniteScrollModule,
     SharedModule
   ],

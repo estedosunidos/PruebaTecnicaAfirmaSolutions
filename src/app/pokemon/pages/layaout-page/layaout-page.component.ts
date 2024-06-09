@@ -9,17 +9,24 @@ import { PokemonsServiceService } from '../../services/pokemons-service.service'
 })
 export class LayaoutPageComponent implements OnInit {
   pokemons: Pokemons[] = [];
-  pagina: number = 1;
+  pages: number = 1;
   size: number = 40;
   isLoading: boolean = false;
   selectedPokemon?: Pokemons;
+  filteredPokemons: Pokemons[] = []; // Array de Pokémon filtrado
+  searchTerm: string = ''; // Término de búsqueda
+
 
   constructor(private pokemonservice: PokemonsServiceService) {}
 
   ngOnInit(): void {
+    // Cargar los Pokémon al iniciar
     this.loadPokemons();
   }
 
+  /**
+   * Loads more Pokémon data if not already loading.
+   */
   loadPokemons(): void {
     if (this.isLoading) {
       return;
@@ -34,16 +41,34 @@ export class LayaoutPageComponent implements OnInit {
     });
   }
 
-
+  /**
+   * Handles the scroll event to load more Pokémon data.
+   */
   onScroll(): void {
     this.loadPokemons();
   }
 
+  /**
+   * Retrieves and sets the selected Pokémon when a card is clicked.
+   * @param id The ID of the selected Pokémon.
+   */
   tarjetaClickeada(id: number) {
-    console.log(id)
     this.pokemonservice.getById(id).subscribe(pokemon => {
       this.selectedPokemon = pokemon;
-       console.log(this.selectedPokemon)
-     });
+    });
   }
+
+  /**
+   * Filters the list of Pokémon based on the search term.
+   */
+  applyFilter() {
+    if (this.searchTerm) {
+      this.filteredPokemons = this.pokemons.filter(pokemon =>
+        pokemon.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      this.filteredPokemons = this.pokemons;
+    }
+  }
+
 }

@@ -14,28 +14,44 @@ export class PokemonsServiceService {
 
   constructor(private http: HttpClient) {}
 
-  getAllPokem(): Observable<Pokemons[]> {
-    const offset = this.size * (this.page - 1);
-    return this.http.get<Pokemons[]>(`${this.baseUrl}/pokemon?limit=${this.size}&offset=${offset}`).pipe(
-      map((resp: any) => this.transformSmallPokemon(resp))
-    );
-  }
-  getById(id: number): Observable<Pokemons> {
-    return this.http.get<Pokemons>(`${this.baseUrl}/pokemon/${id}`);
-  }
+ /**
+ * Retrieves a list of Pokémon from the API based on the current page and size settings.
+ * @returns An observable containing an array of Pokémon.
+ */
+getAllPokem(): Observable<Pokemons[]> {
+  const offset = this.size * (this.page - 1);
+  return this.http.get<Pokemons[]>(`${this.baseUrl}/pokemon?limit=${this.size}&offset=${offset}`).pipe(
+    map((resp: any) => this.transformSmallPokemon(resp))
+  );
+}
 
+/**
+ * Retrieves a Pokémon by its ID from the API.
+ * @param id The ID of the Pokémon to retrieve.
+ * @returns An observable containing the Pokémon data.
+ */
+getById(id: number): Observable<Pokemons> {
+  return this.http.get<Pokemons>(`${this.baseUrl}/pokemon/${id}`);
+}
 
-  private transformSmallPokemon(resp: any): Pokemons[] {
-    const pokemonList: Pokemons[] = resp.results.map((poke: any) => {
-      const id = poke.url.split('/')[6];
-      const pic = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-      return {
-        id,
-        name: poke.name,
-        pic: pic
-      };
-    });
-    this.page++;
-    return pokemonList;
-  }
+/**
+ * Transforms the API response into an array of Pokémon objects with simplified data.
+ * Increments the page counter for pagination.
+ * @param resp The API response containing Pokémon data.
+ * @returns An array of Pokémon with simplified data.
+ */
+private transformSmallPokemon(resp: any): Pokemons[] {
+  const pokemonList: Pokemons[] = resp.results.map((poke: any) => {
+    const id = poke.url.split('/')[6];
+    const pic = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+    return {
+      id,
+      name: poke.name,
+      pic: pic
+    };
+  });
+  this.page++;
+  return pokemonList;
+}
+
 }

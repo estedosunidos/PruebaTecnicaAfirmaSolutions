@@ -5,27 +5,28 @@
   align-items: center;
   background: repeating-linear-gradient(
     0deg,
-    #79a0e3 0px,
-    #79a0e3 10px,
-    #668cd7 10px,
-    #668cd7 50px,
-    #79a0e3 50px,
-    #79a0e3 60px,
-    #5576c5 60px,
-    #5576c5 90px,
-    #79a0e3 90px,
-    #79a0e3 100px,
-    #4c69b8 100px,
-    #4c69b8 140px,
-    #79a0e3 140px,
-    #79a0e3 150px,
-    #4660b4 150px,
-    #4660b4 160px,
-    #79a0e3 160px,
-    #79a0e3 170px,
-    #5576c5 170px,
-    #5576c5 190px
-  );
+    #f5f5f5,
+    #f5f5f5 10px,
+    #c8c8c8 10px,
+    #c8c8c8 50px,
+    #f5f5f5 50px,
+    #f5f5f5 60px,
+    #b0b0b0 60px,
+    #b0b0b0 90px,
+    #f5f5f5 90px,
+    #f5f5f5 100px,
+    #8c8c8c 100px,
+    #8c8c8c 140px,
+    #f5f5f5 140px,
+    #f5f5f5 150px,
+    #757575 150px,
+    #757575 160px,
+    #f5f5f5 160px,
+    #f5f5f5 170px,
+    #b0b0b0 170px,
+    #b0b0b0 190px
+);
+
   height: calc(100vh - 110px);
 }
 .tarjetacontaine{
@@ -74,14 +75,11 @@ header {
   display: flex;
   align-items: center;
   padding: 0 20px ;
-  background: linear-gradient(
-    to right,
-    #6188ff,
-    #6188ff 70%,
-    #71a4f3 71%,
-    #71a4f3 97%,
-    #8ec0f0 100%
-  );
+  background-color: #306078;
+
+
+
+
 }
 .titlecontainer {
   display: flex;

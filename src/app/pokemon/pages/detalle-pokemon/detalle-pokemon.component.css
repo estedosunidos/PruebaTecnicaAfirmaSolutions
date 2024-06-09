@@ -179,3 +179,67 @@
   padding: 5px;
   display: inline-block;
 }
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+
+.pokemon-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemon-details h3 {
+  margin: 10px 0;
+  color: #333;
+}
+
+.abilities-list, .types-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.ability-item, .type-item {
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.ability-item {
+  background-color: #d3f9d8;
+}
+
+.type-item {
+  background-color: #f0f0f0;
+}
+
+.pokemon-weight, .pokemon-height, .pokemon-species {
+  display: block;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.type-fire {
+  background-color: #fddfdf;
+  color: #cc0000;
+}
+
+.type-water {
+  background-color: #ddf0ff;
+  color: #0066cc;
+}
+

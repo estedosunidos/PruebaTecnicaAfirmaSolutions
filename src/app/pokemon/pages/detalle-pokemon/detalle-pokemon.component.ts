@@ -8,7 +8,12 @@ import { Pokemon, Pokemons } from '../../interfaces/pokemon.interface';
 })
 export class DetallePokemonComponent {
  @Input() pokemon? :Pokemons | undefined
- getTipoClass(tipo: string): string {
+ /**
+ * Returns a CSS class based on the provided Pokémon type.
+ * @param tipo The Pokémon type.
+ * @returns The CSS class corresponding to the Pokémon type.
+ */
+getTipoClass(tipo: string): string {
   switch (tipo) {
     case 'water':
       return 'water';
@@ -52,3 +57,5 @@ export class DetallePokemonComponent {
 }
 
 }
+
+

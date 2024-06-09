@@ -3,13 +3,13 @@ import { DetallePokemonComponent } from "./detalle-pokemon.component";
 
 describe('DetallePokemonComponent', () => {
   let component: DetallePokemonComponent;
-  let fixture: ComponentFixture<DetallePokemonComponent>; // Declarar fixture fuera del beforeEach
+  let fixture: ComponentFixture<DetallePokemonComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [DetallePokemonComponent],
     });
-    fixture = TestBed.createComponent(DetallePokemonComponent); // Asignar valor a fixture
+    fixture = TestBed.createComponent(DetallePokemonComponent);
     component = fixture.componentInstance;
   });
 
@@ -17,6 +17,21 @@ describe('DetallePokemonComponent', () => {
     expect(component.getTipoClass('water')).toEqual('water');
     expect(component.getTipoClass('fire')).toEqual('fire');
     expect(component.getTipoClass('grass')).toEqual('grass');
+    expect(component.getTipoClass('electric')).toEqual('electric');
+    expect(component.getTipoClass('ice')).toEqual('ice');
+    expect(component.getTipoClass('fighting')).toEqual('fighting');
+    expect(component.getTipoClass('poison')).toEqual('poison');
+    expect(component.getTipoClass('flying')).toEqual('flying');
+    expect(component.getTipoClass('rock')).toEqual('rock');
+    expect(component.getTipoClass('bug')).toEqual('bug');
+    expect(component.getTipoClass('ghost')).toEqual('ghost');
+    expect(component.getTipoClass('steel')).toEqual('steel');
+    expect(component.getTipoClass('dragon')).toEqual('dragon');
+    expect(component.getTipoClass('dark')).toEqual('dark');
+    expect(component.getTipoClass('fairy')).toEqual('fairy');
+    expect(component.getTipoClass('normal')).toEqual('normal');
+    expect(component.getTipoClass('psychic')).toEqual('psychic');
+
 
   });
 
