@@ -5,13 +5,10 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './progress-bar.component.html',
   styleUrls: ['./progress-bar.component.css']
 })
-export class ProgressBarComponent implements OnInit {
+export class ProgressBarComponent  {
 
 @Input() color='bug'
 @Input() value= 0
 @Input() height=20
-constructor(){}
-ngOnInit(): void {
-  throw new Error('Method not implemented.');
-}
+
 }

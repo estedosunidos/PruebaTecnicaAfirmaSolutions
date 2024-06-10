@@ -11,9 +11,7 @@ import { PokemonsServiceService } from '../../services/pokemons-service.service'
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.css']
 })
-export class SearchPageComponent implements OnInit {
+export class SearchPageComponent {
   @Input() pokemon: Pokemons | undefined;
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+
 }

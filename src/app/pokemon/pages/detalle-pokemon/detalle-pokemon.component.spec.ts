@@ -31,6 +31,7 @@ describe('DetallePokemonComponent', () => {
     expect(component.getTipoClass('fairy')).toEqual('fairy');
     expect(component.getTipoClass('normal')).toEqual('normal');
     expect(component.getTipoClass('psychic')).toEqual('psychic');
+    expect(component.getTipoClass('ground')).toEqual('ground');
 
 
   });

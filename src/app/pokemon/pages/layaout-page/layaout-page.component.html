@@ -3,21 +3,16 @@
     <div class="titlecontainer">
       <h1>Pokedex</h1>
     </div>
-    <div class="filter-container">
+    <!-- <div class="filter-container">
       <input type="text" [(ngModel)]="searchTerm" placeholder="Search pokemon..." (input)="applyFilter()">
-    </div>
+    </div> -->
 
   </header>
 
   <div class="container">
     <app-detalle-pokemon [pokemon]="selectedPokemon"></app-detalle-pokemon>
-    <div class="tarjetacontaine"
-         infiniteScroll
-         [infiniteScrollDistance]="2"
-         [infiniteScrollUpDistance]="1.5"
-         [infiniteScrollThrottle]="300"
-         (scrolled)="onScroll()">
-      <app-tarjetas-pokemon  *ngFor="let pokemon of filteredPokemons" [data]="pokemon" (clickeado)="tarjetaClickeada($event)" ></app-tarjetas-pokemon>
+    <div class="tarjetacontaine">
+      <app-tarjetas-pokemon  *ngFor="let pokemon of pokemons" [data]="pokemon" (clickeado)="tarjetaClickeada($event)" ></app-tarjetas-pokemon>
     </div>
   </div>
   <footer></footer>

@@ -1,77 +1,184 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { of, throwError } from 'rxjs';
 import { LayaoutPageComponent } from './layaout-page.component';
 import { PokemonsServiceService } from '../../services/pokemons-service.service';
-import { of } from 'rxjs';
 import { Pokemons } from '../../interfaces/pokemon.interface';
-
+import { MatSidenavContent, MatSidenavModule } from '@angular/material/sidenav';
+import { DetallePokemonComponent } from '../detalle-pokemon/detalle-pokemon.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('LayaoutPageComponent', () => {
   let component: LayaoutPageComponent;
   let fixture: ComponentFixture<LayaoutPageComponent>;
-  let pokemonsService: PokemonsServiceService;
+  let pokemonService: jest.Mocked<PokemonsServiceService>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [LayaoutPageComponent],
-      imports: [HttpClientTestingModule],
-      providers: [PokemonsServiceService]
-    });
+  beforeEach(async () => {
+    const pokemonServiceMock = {
+      getAllPokem: jest.fn(),
+      getById: jest.fn(),
+    };
 
+    await TestBed.configureTestingModule({
+      declarations: [LayaoutPageComponent, DetallePokemonComponent],
+      imports: [MatSidenavModule,HttpClientModule],
+      providers: [
+        { provide: PokemonsServiceService, useValue: pokemonServiceMock }
+      ]
+    }).compileComponents();
     fixture = TestBed.createComponent(LayaoutPageComponent);
     component = fixture.componentInstance;
-    pokemonsService = TestBed.inject(PokemonsServiceService);
-    spyOn(pokemonsService, 'getAllPokem').and.returnValue(of([{ id: 1, name: 'Pikachu', pic: '', base_experience: 0, height: 0, is_default: false }]));
-    spyOn(pokemonsService, 'getById').and.returnValue(of({ id: 1, name: 'Pikachu', pic: '', base_experience: 0, height: 0, is_default: false }));
+    pokemonService = TestBed.inject(PokemonsServiceService) as jest.Mocked<PokemonsServiceService>;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should load pokemons on init', () => {
-    component.ngOnInit();
-    expect(pokemonsService.getAllPokem).toHaveBeenCalled();
+  it('should not load pokemons if already loading', () => {
+    component.isLoading = true;
+
+    component.loadPokemons();
+
+    expect(pokemonService.getAllPokem).not.toHaveBeenCalled();
   });
 
-  it('should handle scroll event', () => {
-    component.onScroll();
-    expect(pokemonsService.getAllPokem).toHaveBeenCalled();
+  it('should load pokemons successfully', () => {
+    const mockPokemons: Pokemons[] = [
+      {
+        id: 1,
+        name: 'Bulbasaur',
+        abilities: [],
+        base_experience: 0,
+        forms: [],
+        game_indices: [],
+        height: 0,
+        held_items: [],
+        is_default: false,
+        location_area_encounters: '',
+        moves: [],
+        order: 0,
+        past_types: [],
+        pic: '',
+        species: undefined,
+        sprites: undefined,
+        stats: [],
+        types: [],
+        weight: 0
+      },
+      {
+        id: 2,
+        name: 'Ivysaur',
+        abilities: [],
+        base_experience: 0,
+        forms: [],
+        game_indices: [],
+        height: 0,
+        held_items: [],
+        is_default: false,
+        location_area_encounters: '',
+        moves: [],
+        order: 0,
+        past_types: [],
+        pic: '',
+        species: undefined,
+        sprites: undefined,
+        stats: [],
+        types: [],
+        weight: 0
+      }
+    ];
+    pokemonService.getAllPokem.mockReturnValue(of(mockPokemons));
+
+    component.loadPokemons();
+
+    expect(component.isLoading).toBe(true);
+    expect(pokemonService.getAllPokem).toHaveBeenCalled();
+
+    fixture.detectChanges();
+
+    expect(component.pokemons).toEqual(mockPokemons);
+    expect(component.isLoading).toBe(true);
   });
 
-  it('should handle card click', () => {
-    const id = 1;
-    component.tarjetaClickeada(id);
-    expect(pokemonsService.getById).toHaveBeenCalledWith(id);
+  it('should handle error when loading pokemons', () => {
+    pokemonService.getAllPokem.mockReturnValue(throwError(() => new Error('Error')));
+
+    component.loadPokemons();
+
+    expect(component.isLoading).toBe(true);
+    expect(pokemonService.getAllPokem).toHaveBeenCalled();
+
+    fixture.detectChanges();
+
+    expect(component.isLoading).toBe(true);
   });
 
+  it('should select a pokemon successfully', () => {
+    const mockPokemon: Pokemons = {
+      id: 1,
+      name: 'Bulbasaur',
+      abilities: [],
+      base_experience: 0,
+      forms: [],
+      game_indices: [],
+      height: 0,
+      held_items: [],
+      is_default: false,
+      location_area_encounters: '',
+      moves: [],
+      order: 0,
+      past_types: [],
+      pic: '',
+      species: undefined,
+      sprites: undefined,
+      stats: [],
+      types: [],
+      weight: 0
+    };
+    pokemonService.getById.mockReturnValue(of(mockPokemon));
 
-    it('should apply filter', () => {
-      const testData: Pokemons[] = [
-        {
-          id: 0, name: 'Pikachu', pic: 'pikachu.jpg', base_experience: 100, height: 40, is_default: false,
-          order: 0,
-          weight: 0,
-          abilities: [],
-          forms: [],
-          game_indices: [],
-          held_items: [],
-          location_area_encounters: '',
-          moves: [],
-          species: undefined,
-          sprites: undefined,
-          stats: [],
-          types: [],
-          past_types: []
-        },
+    component.tarjetaClickeada(1);
 
-      ];
+    expect(pokemonService.getById).toHaveBeenCalledWith(1);
 
-      component.pokemons = testData;
-      component.searchTerm = 'pika';
-      component.applyFilter();
+    fixture.detectChanges();
 
-      expect(component.filteredPokemons.length).toBe(1);
-      expect(component.filteredPokemons[0].name).toBe('Pikachu');
+    expect(component.selectedPokemon).toEqual(mockPokemon);
   });
-})
+
+  it('should handle error when selecting a pokemon', () => {
+    pokemonService.getById.mockReturnValue(throwError(() => new Error('Error')));
+
+    component.tarjetaClickeada(1);
+
+    expect(pokemonService.getById).toHaveBeenCalledWith(1);
+
+    fixture.detectChanges();
+
+    expect(component.selectedPokemon).toBeUndefined();
+  });
+  it('should load pokemons successfully', () => {
+    const pokemonList: any[] = [];
+    const getAllPokemSpy = spyOn(pokemonService, 'getAllPokem').and.returnValue(of(pokemonList));
+
+    component.loadPokemons();
+
+    expect(component.isLoading).toBe(false);
+    expect(getAllPokemSpy).toHaveBeenCalled();
+    expect(component.isLoading).toBe(false);
+  });
+
+  it('should handle error when loading pokemons', async () => {
+    const error = 'Error';
+    const getAllPokemSpy = jest.spyOn(pokemonService, 'getAllPokem').mockReturnValue(await Promise.reject(error));
+
+    await component.loadPokemons();
+
+    expect(component.isLoading).toBe(false);
+    expect(getAllPokemSpy).toHaveBeenCalled();
+
+    getAllPokemSpy.mockRestore();
+    expect(component.error).toEqual(error);
+  });
+
+});

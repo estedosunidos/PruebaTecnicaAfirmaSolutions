@@ -42,7 +42,7 @@ Para ejecutar la aplicación en un servidor de desarrollo, sigue estos pasos:
 
 ## Ejecución de Pruebas Unitarias
 
-Para ejecutar las pruebas unitarias, utiliza el comando ```ng test```. Jest se encargará de ejecutar las pruebas y mostrar los resultados.
+Para ejecutar las pruebas unitarias, utiliza el comando ```npm run test```. Jest se encargará de ejecutar las pruebas y mostrar los resultados.
  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # AppPoken
 
@@ -87,4 +87,4 @@ To run the application on a development server, follow these steps:
 
 ## Running Unit Tests
 
-To run the unit tests, use the command `ng test`. Jest will execute the tests and display the results.
+To run the unit tests, use the command `npm run test`. Jest will execute the tests and display the results.
