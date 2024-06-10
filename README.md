@@ -35,10 +35,11 @@ El proyecto está estructurado de la siguiente manera:
 
 Para ejecutar la aplicación en un servidor de desarrollo, sigue estos pasos:
 
-1. Clona el repositorio utilizando ```https://github.com/estedosunidos/PruebaTecnicaAfirmaSolutions.git```.
-2. Instala las dependencias utilizando ```npm install```.
-3. Inicia la aplicación utilizando ```npm start```.
-4. Navega a ```http://localhost:4200/``` en tu navegador para ver la aplicación en funcionamiento.
+1. Clona el repositorio utilizando ```git clone https://github.com/estedosunidos/PruebaTecnicaAfirmaSolutions.git```.
+2. Entra ala caperta donde se clono el proyecto ``` cd caperta ```
+3. Instala las dependencias utilizando ```npm install```.
+4. Inicia la aplicación utilizando ```npm start```.
+5. Navega a ```http://localhost:4200/``` en tu navegador para ver la aplicación en funcionamiento.
 
 ## Ejecución de Pruebas Unitarias
 
