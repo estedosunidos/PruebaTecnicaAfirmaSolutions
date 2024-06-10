@@ -8,6 +8,9 @@ import { PokemonsServiceService } from '../../services/pokemons-service.service'
   styleUrls: ['./layaout-page.component.css']
 })
 export class LayaoutPageComponent implements OnInit {
+  error(error: any) {
+    throw new Error('Method not implemented.');
+  }
   pokemons: Pokemons[] = [];
   pagina: number = 1;
   size: number = 40;
